@@ -20,6 +20,7 @@
 <body>
 <div id="map"></div>
 <script>
+    // Map configuration
     var map = L.map('map', {
         crs: L.CRS.Simple,
         minZoom: -3
@@ -27,7 +28,8 @@
     var bounds = [[0, 0], [5500, 8192]];
     var image = L.imageOverlay('img/map.jpg', bounds).addTo(map);
     map.fitBounds(bounds);
-    
+
+    // Layer configuration
     var chestIcon = L.icon({
         iconUrl: 'img/chest.webp',
         iconSize: [48,48],
@@ -35,22 +37,38 @@
     });
     var coinIcon = L.icon({
         iconUrl: 'img/coin.webp',
-        iconSize: [35, 44],
-        iconAnchor: [18, 20]
+        iconSize: [23.3, 29.3],
+        iconAnchor: [12, 13.3]
     });
     var chestLayer = L.layerGroup().addTo(map);
     var coinLayer = L.layerGroup().addTo(map);
-    L.control.layers({}, {Chests: chestLayer, Coins: coinLayer}, {collapsed: false}).addTo(map);
-    
-    L.marker([1399, 5156], {icon: chestIcon}) //GIMP coordinates: 5156 4101
-        .bindPopup("Hello world!")
+    var coordinateLayer = L.layerGroup();
+    L.control.layers({}, {Chests: chestLayer, Coins: coinLayer, XY: coordinateLayer}, {collapsed: false}).addTo(map);
+
+    // Chest definitions - ToDo extract from csv
+    L.marker([1399, 5156], {icon: chestIcon, title: 'Hello world!'})
+        .bindPopup('Hello world!')
         .addTo(chestLayer);
-    L.marker([1337, 1337], {icon: chestIcon})
-        .bindPopup("Foo Bar")
+    L.marker([1741, 3172], {icon: chestIcon, title: 'Foo Bar'})
+        .bindPopup('Foo Bar')
         .addTo(chestLayer);
-    
-    L.marker([42, 42], {icon: coinIcon})
+
+    // Coin definitions - ToDo extract from csv
+    L.marker([42, 1337], {icon: coinIcon, title: '13 Coins'})
+        .bindPopup('13 Coins')
         .addTo(coinLayer);
+
+    // Coordinate extraction tool
+    L.marker([2750, 4096], {zIndexOffset: 1000, draggable: true})
+        .bindPopup('-, -')
+        .addTo(coordinateLayer)
+        .on('moveend', function(e) {
+            var marker = e.target;
+            var latlng = marker.getLatLng();
+            var x = Math.round(latlng.lng), y = Math.round(5500 - latlng.lat);
+            marker.setPopupContent(x + ', ' + y);
+            marker.openPopup();
+        });
 </script>
 </body>
 </html>
