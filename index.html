@@ -6,59 +6,51 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
-    <script src="https://unpkg.com/maplibre-gl@2.0.0/dist/maplibre-gl.js"></script>
-    <link href="https://unpkg.com/maplibre-gl@2.0.0/dist/maplibre-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
     <style>
         body { margin: 0; padding: 0; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; background: #141414; }
     </style>
 </head>
 <body>
 <div id="map"></div>
 <script>
-    var mapStyle = {
-        'version': 8,
-        'sources': {
-            'siu': {
-                'type': 'image',
-                'url': 'img/map.jpg',
-                'coordinates': [
-                    [ 0   , 55],
-                    [81.92, 55],
-                    [81.92,  0],
-                    [ 0   ,  0]
-                ]
-            }
-        },
-        'layers': [
-            {
-                'id': 'background',
-                'type': 'background',
-                'paint': {
-                    'background-color': 'rgb(20,20,20)'
-                }
-            },
-            {
-                'id': 'siu',
-                'type': 'raster',
-                'source': 'siu'
-            }
-        ]
-    };
-    var map = new maplibregl.Map({
-        container: 'map',
-        center: [42, 32],
-        zoom: 3.5,
-        maxPitch: 0,
-        style: mapStyle
+    var map = L.map('map', {
+        crs: L.CRS.Simple,
+        minZoom: -3
     });
-    $.get('chests.csv', (data) => {
-        var chests = $.csv.toObjects(data);
-        chests.forEach((chest) => {
-            console.log('ToDo show chest', chest)
-        });
-    })
+    var bounds = [[0, 0], [5500, 8192]];
+    var image = L.imageOverlay('img/map.jpg', bounds).addTo(map);
+    map.fitBounds(bounds);
+    
+    var chestIcon = L.icon({
+        iconUrl: 'img/chest.webp',
+        iconSize: [48,48],
+        iconAnchor: [24,24]
+    });
+    var coinIcon = L.icon({
+        iconUrl: 'img/coin.webp',
+        iconSize: [35, 44],
+        iconAnchor: [18, 20]
+    });
+    var chestLayer = L.layerGroup().addTo(map);
+    var coinLayer = L.layerGroup().addTo(map);
+    L.control.layers({}, {Chests: chestLayer, Coins: coinLayer}, {collapsed: false}).addTo(map);
+    
+    L.marker([1399, 5156], {icon: chestIcon}) //GIMP coordinates: 5156 4101
+        .bindPopup("Hello world!")
+        .addTo(chestLayer);
+    L.marker([1337, 1337], {icon: chestIcon})
+        .bindPopup("Foo Bar")
+        .addTo(chestLayer);
+    
+    L.marker([42, 42], {icon: coinIcon})
+        .addTo(coinLayer);
 </script>
-
 </body>
 </html>
