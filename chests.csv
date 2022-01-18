@@ -1,3 +1,3 @@
-x,y,content,image
-0,0,"3 Gold","ExampleChest.jpg"
-1000,0,"+1 Regeneration",
+x,y,content,comment,image
+0,0,"3 Gold","Optional comment to explain something","ExampleChest.jpg"
+1000,0,"+1 Regeneration",,
