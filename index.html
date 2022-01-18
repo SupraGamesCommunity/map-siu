@@ -6,6 +6,7 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
+    <link rel="icon" type="image/png" href="img/Trophy.png" sizes="200x200">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
@@ -31,35 +32,33 @@
 
     // Layer configuration
     var chestIcon = L.icon({
-        iconUrl: 'img/chest.webp',
-        iconSize: [48,48],
-        iconAnchor: [24,24]
+        iconUrl: 'img/Chest.png',
+        iconSize: [42,42],
+        iconAnchor: [24,18]
     });
     var coinIcon = L.icon({
-        iconUrl: 'img/coin.webp',
-        iconSize: [23.3, 29.3],
-        iconAnchor: [12, 13.3]
+        iconUrl: 'img/Coin.png',
+        iconSize: [16, 20],
+        iconAnchor: [8, 10]
+    });
+    var coinStashIcon = L.icon({
+        iconUrl: 'img/Coins.png',
+        iconSize: [25, 25],
+        iconAnchor: [10, 14]
+    });
+    var trophyIcon = L.icon({
+        iconUrl: 'img/Trophy.png',
+        iconSize: [25, 25],
+        iconAnchor: [12, 12]
     });
     var chestLayer = L.layerGroup().addTo(map);
     var coinLayer = L.layerGroup().addTo(map);
+    var trophyLayer = L.layerGroup().addTo(map);
     var coordinateLayer = L.layerGroup();
-    L.control.layers({}, {Chests: chestLayer, Coins: coinLayer, XY: coordinateLayer}, {collapsed: false}).addTo(map);
-
-    // Chest definitions - ToDo extract from csv
-    L.marker([1399, 5156], {icon: chestIcon, title: 'Hello world!'})
-        .bindPopup('Hello world!')
-        .addTo(chestLayer);
-    L.marker([1741, 3172], {icon: chestIcon, title: 'Foo Bar'})
-        .bindPopup('Foo Bar')
-        .addTo(chestLayer);
-
-    // Coin definitions - ToDo extract from csv
-    L.marker([42, 1337], {icon: coinIcon, title: '13 Coins'})
-        .bindPopup('13 Coins')
-        .addTo(coinLayer);
+    L.control.layers({}, {Chests: chestLayer, Coins: coinLayer, Trophies: trophyLayer, XY: coordinateLayer}, {collapsed: false}).addTo(map);
 
     // Coordinate extraction tool
-    L.marker([2750, 4096], {zIndexOffset: 1000, draggable: true})
+    L.marker([2750, 4096], {zIndexOffset: 10000, draggable: true})
         .bindPopup('-, -')
         .addTo(coordinateLayer)
         .on('moveend', function(e) {
@@ -69,6 +68,51 @@
             marker.setPopupContent(x + ', ' + y);
             marker.openPopup();
         });
+
+    // Load chests from CSV
+    $.get('chests.csv', function(csv) {
+        var chests = $.csv.toObjects(csv);
+        chests.forEach(function(chest) {
+            var lat = 5500 - parseInt(chest.y, 10), lng = parseInt(chest.x);
+            var popup = chest.content;
+            if (chest.image) {
+                var chestImage = 'img/chests/' + chest.image;
+                popup += '<br/><a href="' + chestImage + '" target="_blank"><img width=100 src="' + chestImage + '"/></a>';
+            }
+            L.marker([lat, lng], {icon: chestIcon, title: chest.content})
+                .bindPopup(popup)
+                .addTo(chestLayer);
+        });
+    });
+
+    // Load coins from CSV
+    $.get('coins.csv', function(csv) {
+        var coins = $.csv.toObjects(csv);
+        coins.forEach(function(coin) {
+            var lat = 5500 - parseInt(coin.y, 10), lng = parseInt(coin.x);
+            var icon = coin.count > 1 ? coinStashIcon : coinIcon;
+            var title = coin.count > 1 ? coin.count + ' Coins' : '1 Coin';
+            L.marker([lat, lng], {icon: icon, title: title})
+                .bindPopup(title)
+                .addTo(coinLayer);
+        });
+    });
+
+    // Load trophies from CSV
+    $.get('trophies.csv', function(csv) {
+        var trophies = $.csv.toObjects(csv);
+        trophies.forEach(function(trophy) {
+            var lat = 5500 - parseInt(trophy.y, 10), lng = parseInt(trophy.x);
+            var popup = trophy.comment;
+            if (trophy.image) {
+                var trophyImage = 'img/trophies/' + trophy.image;
+                popup += '<br/><a href="' + trophyImage + '" target="_blank"><img width=100 src="' + trophyImage + '"/></a>';
+            }
+            L.marker([lat, lng], {icon: trophyIcon, title: trophy.comment})
+                .bindPopup(popup)
+                .addTo(trophyLayer);
+        });
+    });
 </script>
 </body>
 </html>
