@@ -1,3 +1,19 @@
-x,y,content,image
-0,0,"3 Gold","ExampleChest.jpg"
-1000,0,"+1 Regeneration",
+x, y, content, image
+0, 0, "3 Gold", "ExampleChest.jpg"
+1000, 0, "+1 Regeneration",
+4829, 4463, "2 Gold", "MiningArea_2Coins_4829_4463.jpg"
+5394, 4387, "2 Gold", "MiningArea_2Coins_5394_4387.jpg"
+4721, 4491, "3 Gold", "MiningArea_3Coins_4721_4491.jpg"
+5205, 4940, "3 Gold", "MiningArea_3Coins_5205_4940.jpg"
+5641, 4462, "3 Gold", "MiningArea_3Coins_5641_4462.jpg"
+5517, 4201, "4 Gold", "MiningArea_4Coins_5517_4201.jpg"
+5626, 4466, "5 Gold", "MiningArea_5Coins_5626_4466.jpg"
+5103, 4978, "10 Gold", "MiningArea_10Coins_5103_4978.jpg"
+5757, 4295, "10 Gold", "MiningArea_10Coins_5757_4295.jpg"
+5274, 4232, "15 Gold", "MiningArea_15Coins_5274_4232.jpg"
+5158, 4103, "20 Gold", "MiningArea_20Coins_5158_4103.jpg"
+5316, 4410, "Max Health +1", "MiningArea_Health+1_5316_4410.jpg"
+5453, 4777, "Max Health +1", "MiningArea_Health+1_5453_4777.jpg"
+5581, 4303, "15 Gold", "MiningFireGunArea_15Coins_5581_4304.jpg"
+6080, 4356, "Max Health +1", "MiningFireGunArea_Health+1_6080_4356.jpg"
+5970, 4601, "Throw Speed +", "MiningFireGunArea_ThrowSpeed+_5970_4601.jpg"
