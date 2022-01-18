@@ -24,9 +24,17 @@
     // Map configuration
     var map = L.map('map', {
         crs: L.CRS.Simple,
-        minZoom: -3
+        minZoom: -8
     });
-    var bounds = [[0, 0], [5500, 8192]];
+    var mapSize = {width: 8192, height: 5500}
+    var pxTrans = {dx: -73730, dy: -29880, m: 18}
+    var bounds = [
+        [pxTrans.dy, pxTrans.dx],
+        [
+            pxTrans.dy + pxTrans.m * mapSize.height,
+            pxTrans.dx + pxTrans.m * mapSize.width
+        ]
+    ];
     var image = L.imageOverlay('img/map.jpg', bounds).addTo(map);
     map.fitBounds(bounds);
 
@@ -64,7 +72,7 @@
         .on('moveend', function(e) {
             var marker = e.target;
             var latlng = marker.getLatLng();
-            var x = Math.round(latlng.lng), y = Math.round(5500 - latlng.lat);
+            var x = Math.round(latlng.lng), y = Math.round(-latlng.lat);
             marker.setPopupContent(x + ', ' + y);
             marker.openPopup();
         });
@@ -89,11 +97,14 @@
     $.get('coins.csv', function(csv) {
         var coins = $.csv.toObjects(csv);
         coins.forEach(function(coin) {
-            var lat = 5500 - parseInt(coin.y, 10), lng = parseInt(coin.x);
+            var lat = -parseInt(coin.y, 10), lng = parseInt(coin.x, 10);
             var icon = coin.count > 1 ? coinStashIcon : coinIcon;
             var title = coin.count > 1 ? coin.count + ' Coins' : '1 Coin';
+            var popup = title;
+            if (coin.type) popup += '<br/><b>Type:</b> ' + coin.type;
+            if (coin.comment) popup += '<br/><b>Comment:</b> ' + coin.comment;
             L.marker([lat, lng], {icon: icon, title: title})
-                .bindPopup(title)
+                .bindPopup(popup)
                 .addTo(coinLayer);
         });
     });
@@ -102,7 +113,7 @@
     $.get('trophies.csv', function(csv) {
         var trophies = $.csv.toObjects(csv);
         trophies.forEach(function(trophy) {
-            var lat = 5500 - parseInt(trophy.y, 10), lng = parseInt(trophy.x);
+            var lat = parseInt(trophy.y, 10), lng = parseInt(trophy.x, 10);
             var popup = trophy.comment;
             if (trophy.image) {
                 var trophyImage = 'img/trophies/' + trophy.image;
