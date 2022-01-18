@@ -13,7 +13,7 @@ x,y,count,comment
 5122,4832,1,Requires increased jump height
 5121,4802,1,Requires increased jump height
 5175,4758,1,Requires increased jump height
-5168,4866,1,Requires increased jump height
+5168,4766,1,Requires increased jump height
 5161,4776,1,Requires increased jump height
 5243,4878,1,Requires increased jump height
 5366,4803,1,Requires increased jump height
@@ -28,8 +28,11 @@ x,y,count,comment
 5401,4365,1,Requires increased jump height
 5663,4290,1,Requires increased jump height
 5667,4298,1,Requires increased jump height
-5460,4332,1,Requires increased jump height
+5460,4330,1,Requires increased jump height
+5459,4325,1,Requires increased jump height
 5377,4805,1,Requires knee bending
 5430,4838,1,Requires knee bending
 5629,4429,1,Requires knee bending
 5452,4907,1,Requires knee bending
+5334,4601,1,Requires increased jump height
+5184,4434,1,Requires increased jump height and a fire source
