@@ -1,24 +1,98 @@
 ﻿type,x,y,z,item,price,comment,image
-shop,15985.713,-27252.01,-78.066,"Health +5",30
-shop,22243.891,15517.757,3172.554,"Crouch",10
-shop,14879.687,-32166.709,1476.634,"Regeneration +1",40
-shop,15713.722,-27285.936,-79.137,"Regeneration +1",30
-shop,14975.882,-31145.398,1455.898,"Faster Pickaxe",50
-shop,16464.307,-28558.439,-72.957,"Diamond Pickaxe",200
-shop,15850.86,-27273.256,-97.39,"Pickaxe Damage +1",30
-shop,16443.494,-28352.66,-57.282,"Iron Pickaxe",100
-shop,22141.174,15441.425,3200.793,"Jump Height",10
-shop,-61380,-49300,10070,"Trophy Detector",500
-shop,16432.439,-28170.812,-77.566,"Stone Pickaxe",20
-shop,22349.588,15551.454,3223.588,"Wood Pickaxe",42
-shop,-58072.664,-21770.59,7850.278,"Bone Detector",50
-shop,-58074.578,-22132.297,7836.954,"Chest Detector",50
-shop,15044.42,-31863.377,1447.706,"Critical Chance +5",30
-shop,15044.42,-31716.455,1466.543,"Critical Chance +5",30
-shop,15039.346,-31459.777,1457.179,"Gun Damage +100%",50
-shop,-58030.922,-22020.418,7861.437,"Chest Count",50
-shop,15581.537,-27308.482,-92.875,"Map",60
-chest,21958,10260,,"Max Health +1",,,"MiningArea_Health+1_5316_4410.jpg"
-chest,24424,16866,,"Max Health +1",,,"MiningArea_Health+1_5453_4777.jpg"
-chest,35710,9288,,"Max Health +1",,,"MiningFireGunArea_Health+1_6080_4356.jpg"
-chest,33730,13698,,"Throw Speed +",,,"MiningFireGunArea_ThrowSpeed+_5970_4601.jpg"
+shop,15985.713,-27252.01,-78.066,Health +5,30,,
+shop,22243.891,15517.757,3172.554,Crouch,10,,
+shop,14879.687,-32166.709,1476.634,Regeneration +1,40,,
+shop,15713.722,-27285.936,-79.137,Regeneration +1,30,,
+shop,14975.882,-31145.398,1455.898,Faster Pickaxe,50,,
+shop,16464.307,-28558.439,-72.957,Diamond Pickaxe,200,,
+shop,15850.86,-27273.256,-97.39,Pickaxe Damage +1,30,,
+shop,16443.494,-28352.66,-57.282,Iron Pickaxe,100,,
+shop,22141.174,15441.425,3200.793,Jump Height,10,,
+shop,-61380,-49300,10070,Trophy Detector,500,,
+shop,16432.439,-28170.812,-77.566,Stone Pickaxe,20,,
+shop,22349.588,15551.454,3223.588,Wood Pickaxe,42,,
+shop,-58072.664,-21770.59,7850.278,Bone Detector,50,,
+shop,-58074.578,-22132.297,7836.954,Chest Detector,50,,
+shop,15044.42,-31863.377,1447.706,Critical Chance +5,30,,
+shop,15044.42,-31716.455,1466.543,Critical Chance +5,30,,
+shop,15039.346,-31459.777,1457.179,Gun Damage +100%,50,,
+shop,-58030.922,-22020.418,7861.437,Chest Count,50,,
+shop,15581.537,-27308.482,-92.875,Map,60,,
+chest,21958,10260,,Max Health +1,,,MiningArea_Health+1_5316_4410.jpg
+chest,24424,16866,,Max Health +1,,,MiningArea_Health+1_5453_4777.jpg
+chest,35710,9288,,Max Health +1,,,MiningFireGunArea_Health+1_6080_4356.jpg
+chest,33730,13698,,Throw Speed +,,,MiningFireGunArea_ThrowSpeed+_5970_4601.jpg
+chest,7726,3299,,Critical Chance +5%,,,
+chest,25432,-20440,,Critical Chance +5%,,,
+chest,3971,1748,,Critical Chance +5%,,,
+chest,-4526,592,,Critical Chance +5%,,,
+chest,7340,2781,,Critical Chance +5%,,,
+chest,8076,3271,,Critical Chance +5%,,,
+chest,18504,-24328,,Critical Chance +5%,,,
+chest,47448,-46136,,Critical Chance +5%,,,
+chest,3264,-42272,,Double Healing Drops,,,
+chest,49976,-25872,,Double Healing Drops,,,
+chest,50048,-60712,,Double Healing Drops,,,
+chest,48864,-57024,,Ammo Capacity+,,,
+chest,352,-40064,,Ammo Capacity+,,,
+chest,7016,1104,,Ammo Capacity+,,,
+chest,-47076,-4392,,Ammo Capacity+,,,
+chest,44400,-19720,,Ammo Capacity+,,,
+chest,58768,-56008,,Ammo Capacity+,,,
+chest,65368,-55856,,Firegun Automatic Refill,,,
+chest,-828,11336,,Gun Damage +100%,,,
+chest,7744,-39808,,Gun Damage +100%,,,
+chest,31192,-32168,,Reload Time -50%,,,
+chest,55360,-63648,,Reload Time -50%,,,
+chest,19952,-22356,,Stun Duration +2,,,
+chest,21568,-30464,,Stun Duration +2,,,
+chest,60784,-13328,,Stun Duration +2,,,
+chest,4920,2269,,Max Health +1,,,
+chest,-952,-36496,,Max Health +1,,,
+chest,3995,1264,,Max Health +1,,,
+chest,4028,970,,Max Health +1,,,
+chest,4392,999,,Max Health +1,,,
+chest,4486,1359,,Max Health +1,,,
+chest,5417,2612,,Max Health +1,,,
+chest,5630,2472,,Max Health +1,,,
+chest,7102,3214,,Max Health +1,,,
+chest,-14512,2184,,Max Health +1,,,
+chest,17848,-7016,,Max Health +1,,,
+chest,-21696,-24432,,Max Health +1,,,
+chest,-26396,-18168,,Max Health +1,,,
+chest,38400,-47200,,Max Health +1,,,
+chest,38496,-47472,,Max Health +1,,,
+chest,43808,-48024,,Max Health +1,,,
+chest,-51152,-1656,,Max Health +1,,,
+chest,51712,-42340,,Max Health +1,,,
+chest,54880,-48840,,Max Health +1,,,
+chest,56784,-12960,,Max Health +1,,,
+chest,59688,-5760,,Max Health +1,,,
+chest,8856,-35752,,Regeneration +,,,
+chest,-16798,-1642,,Regeneration +,,,
+chest,24424,-26152,,Regeneration +,,,
+chest,60880,-9344,,Regeneration +,,,
+chest,5106,2371,,Regeneration +,,,
+chest,5323,2094,,Regeneration +,,,
+chest,7730,3170,,Regeneration +,,,
+chest,56312,57624,,Regeneration +,,,
+chest,-1632,-36240,,Regeneration Speed x2,,,
+chest,5015,2507,,Max Health +1,,,
+chest,-46964,-6764,,Chest Detector,,,
+chest,5057,3285,,Health Bars,,,
+chest,7431,3311,,Pickaxe Cooldown -,,,
+chest,5407,2188,,Pickaxe Damage +1,,,
+chest,4069,2358,,Pickaxe Swing Range +,,,
+chest,4729,2285,,Pickaxe Cooldown -,,,
+chest,26488,-18440,,Pickaxe Damage +1,,,
+chest,36944,-23056,,Throw Speed +,,,
+chest,56288,-49984,,Throw Speed +,,,
+chest,4561,1677,,Throw Speed +,,,
+chest,21568,-22320,,Thrown Distance +,,,
+chest,-42304,-7040,,Thrown Distance +,,,
+chest,55104,-63744,,Thrown Distance +,,,
+chest,-352,-35904,,Thrown Distance +,,,
+chest,2376,-39616,,Thrown Penetration +,,,
+chest,-1440,6792,,Thrown Penetration +,,,
+chest,4751,2398,,Thrown Penetration +,,,
+chest,5520,2283,,Thrown Penetration +,,,
