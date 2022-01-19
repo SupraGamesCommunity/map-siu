@@ -122,7 +122,7 @@
     // Load gold sources from CSV
     $.get('gold.csv', function(csv) {
         var coins = $.csv.toObjects(csv);
-        coins.forEach(function(coin) {
+        coins.forEach(function(coin, index) {
             var lat = -parseInt(coin.y, 10), lng = parseInt(coin.x, 10);
             var icon = coinIcon, layer = coinLayer;
             if (coin.count > 1) icon = coinStashIcon;
@@ -135,6 +135,7 @@
                 var coinImage = 'img/upgrades/' + coin.image;
                 popup += '<br/><a href="' + coinImage + '" target="_blank"><img width=100 src="' + coinImage + '"/></a>';
             }
+            popup += '&emsp;<small>#' + (index + 2) + '</small>'
             L.marker([lat, lng], {icon: icon, title: title})
                 .bindPopup(popup)
                 .addTo(layer);
@@ -145,7 +146,7 @@
     $.get('trophies.csv', function(csv) {
         var trophies = $.csv.toObjects(csv);
         trophies.forEach(function(trophy) {
-            var lat = parseInt(trophy.y, 10), lng = parseInt(trophy.x, 10);
+            var lat = -parseInt(trophy.y, 10), lng = parseInt(trophy.x, 10);
             var popup = trophy.comment;
             if (trophy.image) {
                 var trophyImage = 'img/trophies/' + trophy.image;
