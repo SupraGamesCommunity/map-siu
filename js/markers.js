@@ -15,6 +15,7 @@ export class Markers {
             upgrades.forEach(function(upgrade) {
                 var lat = -parseInt(upgrade.y, 10), lng = parseInt(upgrade.x);
                 var icon = Icons.chest, layer = Layers.itemChest;
+                if (upgrade.type === 'chestGold') {icon = Icons.goldenChest;}
                 if (upgrade.type === 'shop') {icon = Icons.shop; layer = Layers.shop;}
                 var popup = upgrade.item;
                 if (upgrade.comment) popup += '<br/><i>' + upgrade.comment + '</i>';

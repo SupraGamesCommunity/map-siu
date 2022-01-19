@@ -12,6 +12,12 @@ export class Icons {
         iconAnchor: [24,18]
     });
 
+    static goldenChest = L.icon({
+        iconUrl: 'img/GoldChest.png',
+        iconSize: [42,42],
+        iconAnchor: [24,18]
+    });
+
     static coin = L.icon({
         iconUrl: 'img/Coin.png',
         iconSize: [16, 20],
