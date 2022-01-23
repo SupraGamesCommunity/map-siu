@@ -24,12 +24,6 @@ export class Icons {
                     iconSize: [width, height],
                     iconAnchor: [x, y]
                 });
-
-                console.log({
-                    iconUrl: 'img/icons/' + id + '.png',
-                    iconSize: [width, height],
-                    iconAnchor: [x, y]
-                })
             });
         });
     }

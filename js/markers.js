@@ -5,7 +5,7 @@ export class Markers {
     static init() {
         this._loadUpgrades();
         this._loadGold();
-        this._loadTrophies();
+        this._loadCollectables();
         this._addCoordinateExtractionTool();
     }
 
@@ -64,19 +64,22 @@ export class Markers {
         });
     }
 
-    static _loadTrophies() {
-        $.get('data/trophies.csv', function(csv) {
-            let trophies = $.csv.toObjects(csv);
-            trophies.forEach(function(trophy) {
-                let lat = -parseInt(trophy.y, 10), lng = parseInt(trophy.x, 10);
-                let popup = trophy.comment;
-                if (trophy.image) {
-                    let trophyImage = 'img/trophies/' + trophy.image;
-                    popup += '<br/><a href="' + trophyImage + '" target="_blank"><img width=100 src="' + trophyImage + '"/></a>';
+    static _loadCollectables() {
+        $.get('data/collectables.csv', function(csv) {
+            let collectables = $.csv.toObjects(csv);
+            collectables.forEach(function(collectable) {
+                let lat = -parseInt(collectable.y, 10), lng = parseInt(collectable.x, 10);
+                let icon = Icons.get(collectable.icon);
+                let marker = L.marker([lat, lng], {icon: icon, title: collectable.comment})
+                    .addTo(Layers.collectable);
+                if (collectable.comment || collectable.image) {
+                    let popup = collectable.comment;
+                    if (collectable.image) {
+                        let collectableImage = 'img/collectables/' + collectable.image;
+                        popup += '<br/><a href="' + collectableImage + '" target="_blank"><img width=100 src="' + collectableImage + '"/></a>';
+                    }
+                    marker.bindPopup(popup);
                 }
-                L.marker([lat, lng], {icon: Icons.get('trophy'), title: trophy.comment})
-                    .bindPopup(popup)
-                    .addTo(Layers.trophy);
             });
         });
     }
