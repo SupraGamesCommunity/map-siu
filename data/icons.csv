@@ -2,7 +2,7 @@
 ammoCapacity,30,30,,
 beamElasticity,30,30,,
 boneDetector,30,30,,
-bones,25,25,,
+bones,30,30,,
 chest,42,42,24,18
 chestDetector,30,30,,
 chestGold,42,42,24,18
@@ -43,6 +43,6 @@ stunDuration,30,30,,
 translocator,30,30,,
 translocatorCooldown,30,30,,
 translocatorForce,30,30,,
-trophy,25,25,,
+trophy,30,30,,
 trophyDetector,30,30,,
 zappyGun,30,30,,
