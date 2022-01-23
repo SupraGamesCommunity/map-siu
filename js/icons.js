@@ -1,44 +1,36 @@
 export class Icons {
-    static shop = L.icon({
-        //TODO Use a better icon for the shop
-        iconUrl: 'img/Magnet.png',
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
-    });
+    static _icons = {};
 
-    static chest = L.icon({
-        iconUrl: 'img/Chest.png',
-        iconSize: [42,42],
-        iconAnchor: [24,18]
-    });
+    static get(id) {
+        return this._icons[id];
+    }
 
-    static goldenChest = L.icon({
-        iconUrl: 'img/GoldChest.png',
-        iconSize: [42,42],
-        iconAnchor: [24,18]
-    });
+    static init() {
+        this._loadIcons();
+        window.icons = this._icons;
+    }
 
-    static coin = L.icon({
-        iconUrl: 'img/Coin.png',
-        iconSize: [16, 20],
-        iconAnchor: [8, 10]
-    });
+    static _loadIcons() {
+        $.get('data/icons.csv', function(csv) {
+            let icons = $.csv.toObjects(csv);
+            icons.forEach(function(icon) {
+                let id = icon.id;
+                let width = parseInt(icon.width, 10), height = parseInt(icon.height, 10);
+                let x = parseInt(icon.x, 10), y = parseInt(icon.y, 10);
+                if (isNaN(x)) x = width / 2;
+                if (isNaN(y)) y = height / 2;
+                Icons._icons[id] = L.icon({
+                    iconUrl: 'img/icons/' + id + '.png',
+                    iconSize: [width, height],
+                    iconAnchor: [x, y]
+                });
 
-    static coinStash = L.icon({
-        iconUrl: 'img/Coins.png',
-        iconSize: [25, 25],
-        iconAnchor: [10, 14]
-    });
-
-    static brick = L.icon({
-        iconUrl: 'img/CoinsBrick.png',
-        iconSize: [32, 32],
-        iconAnchor: [16, 16]
-    });
-
-    static trophy = L.icon({
-        iconUrl: 'img/Trophy.png',
-        iconSize: [25, 25],
-        iconAnchor: [12, 12]
-    });
+                console.log({
+                    iconUrl: 'img/icons/' + id + '.png',
+                    iconSize: [width, height],
+                    iconAnchor: [x, y]
+                })
+            });
+        });
+    }
 }
