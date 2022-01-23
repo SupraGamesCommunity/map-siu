@@ -10,25 +10,25 @@ export class Layers {
     static collectable;
     static coordinate;
 
-    static init() {
-        this.upgrades = L.layerGroup().addTo(SiuMap.map);
-        this.shop = L.layerGroup();
-        this.itemChest = L.layerGroup();
-        this.coinChest = L.layerGroup();
-        this.coin = L.layerGroup();
-        this.brick = L.layerGroup();
-        this.collectable = L.layerGroup().addTo(SiuMap.map);
-        this.coordinate = L.layerGroup();
+    static async init() {
+        Layers.upgrades = L.layerGroup().addTo(SiuMap.map);
+        Layers.shop = L.layerGroup();
+        Layers.itemChest = L.layerGroup();
+        Layers.coinChest = L.layerGroup();
+        Layers.coin = L.layerGroup();
+        Layers.brick = L.layerGroup();
+        Layers.collectable = L.layerGroup().addTo(SiuMap.map);
+        Layers.coordinate = L.layerGroup();
 
         let layers = {
-            'Upgrades'     : this.upgrades,
-            'Shop'         : this.shop,
-            'Item Chests'  : this.itemChest,
-            'Coin Chests'  : this.coinChest,
-            'Coins'        : this.coin,
-            'Gold Bricks'  : this.brick,
-            'Collectables' : this.collectable,
-            'XY'           : this.coordinate
+            'Upgrades'     : Layers.upgrades,
+            'Shop'         : Layers.shop,
+            'Item Chests'  : Layers.itemChest,
+            'Coin Chests'  : Layers.coinChest,
+            'Coins'        : Layers.coin,
+            'Gold Bricks'  : Layers.brick,
+            'Collectables' : Layers.collectable,
+            'XY'           : Layers.coordinate
         }
         L.control.layers({}, layers, {collapsed: false}).addTo(SiuMap.map);
     }

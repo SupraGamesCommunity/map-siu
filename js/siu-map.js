@@ -1,8 +1,8 @@
 export class SiuMap {
     static map;
 
-    static init() {
-        this.map = L.map('map', {
+    static async init() {
+        SiuMap.map = L.map('map', {
             crs: L.CRS.Simple,
             minZoom: -8
         });
@@ -15,7 +15,7 @@ export class SiuMap {
                 pxTrans.dx + pxTrans.m * mapSize.width
             ]
         ];
-        L.imageOverlay('img/map.jpg', bounds).addTo(this.map);
-        this.map.fitBounds(bounds);
+        L.imageOverlay('img/map.jpg', bounds).addTo(SiuMap.map);
+        SiuMap.map.fitBounds(bounds);
     }
 }

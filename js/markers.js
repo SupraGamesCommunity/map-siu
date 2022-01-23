@@ -2,14 +2,14 @@ import { Layers } from "./layers.js";
 import { Icons } from "./icons.js";
 
 export class Markers {
-    static init() {
-        this._loadUpgrades();
-        this._loadGold();
-        this._loadCollectables();
-        this._addCoordinateExtractionTool();
+    static async init() {
+        return Markers._loadUpgrades()
+            .then(Markers._loadGold)
+            .then(Markers._loadCollectables)
+            .then(Markers._addCoordinateExtractionTool);
     }
 
-    static _loadUpgrades() {
+    static async _loadUpgrades() {
         $.get('data/upgrades.csv', function(csv) {
             let upgrades = $.csv.toObjects(csv);
             upgrades.forEach(function(upgrade) {
@@ -40,7 +40,7 @@ export class Markers {
         });
     }
 
-    static _loadGold() {
+    static async _loadGold() {
         $.get('data/gold.csv', function(csv) {
             let coins = $.csv.toObjects(csv);
             coins.forEach(function(coin, index) {
@@ -64,7 +64,7 @@ export class Markers {
         });
     }
 
-    static _loadCollectables() {
+    static async _loadCollectables() {
         $.get('data/collectables.csv', function(csv) {
             let collectables = $.csv.toObjects(csv);
             collectables.forEach(function(collectable) {
@@ -84,7 +84,7 @@ export class Markers {
         });
     }
 
-    static _addCoordinateExtractionTool() {
+    static async _addCoordinateExtractionTool() {
         L.marker([0, 0], {zIndexOffset: 10000, draggable: true})
             .bindPopup('0, 0')
             .addTo(Layers.coordinate)

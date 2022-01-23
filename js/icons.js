@@ -2,16 +2,15 @@ export class Icons {
     static _icons = {};
 
     static get(id) {
-        return this._icons[id];
+        return Icons._icons[id];
     }
 
-    static init() {
-        this._loadIcons();
-        window.icons = this._icons;
+    static async init() {
+        return Icons._loadIcons();
     }
 
-    static _loadIcons() {
-        $.get('data/icons.csv', function(csv) {
+    static async _loadIcons() {
+        return $.get('data/icons.csv', function(csv) {
             let icons = $.csv.toObjects(csv);
             icons.forEach(function(icon) {
                 let id = icon.id;
