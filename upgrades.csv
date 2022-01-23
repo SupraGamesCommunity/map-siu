@@ -1,4 +1,4 @@
-﻿type,subtype,x,y,z,item,price,comment,image,
+﻿type,icon,x,y,z,item,price,comment,image,
 chest,ammoCapacity,48864,-57024,,Ammo Capacity+,,,,
 chest,ammoCapacity,352,-40064,,Ammo Capacity+,,,,
 chest,ammoCapacity,7016,1104,,Ammo Capacity+,,,,
