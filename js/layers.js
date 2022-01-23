@@ -1,6 +1,7 @@
 import { SiuMap } from "./siu-map.js";
 
 export class Layers {
+    static upgrades;
     static shop;
     static itemChest;
     static coinChest;
@@ -10,15 +11,17 @@ export class Layers {
     static coordinate;
 
     static init() {
-        this.shop = L.layerGroup().addTo(SiuMap.map);
-        this.itemChest = L.layerGroup().addTo(SiuMap.map);
-        this.coinChest = L.layerGroup().addTo(SiuMap.map);
-        this.coin = L.layerGroup().addTo(SiuMap.map);
-        this.brick = L.layerGroup().addTo(SiuMap.map);
+        this.upgrades = L.layerGroup().addTo(SiuMap.map);
+        this.shop = L.layerGroup();
+        this.itemChest = L.layerGroup();
+        this.coinChest = L.layerGroup();
+        this.coin = L.layerGroup();
+        this.brick = L.layerGroup();
         this.trophy = L.layerGroup().addTo(SiuMap.map);
         this.coordinate = L.layerGroup();
 
         let layers = {
+            'Upgrades'    : this.upgrades,
             'Shop'        : this.shop,
             'Item Chests' : this.itemChest,
             'Coin Chests' : this.coinChest,
