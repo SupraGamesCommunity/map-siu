@@ -23,8 +23,8 @@ export class Markers {
                     let upgradeImage = 'img/upgrades/' + upgrade.image;
                     popup += '<br/><a href="' + upgradeImage + '" target="_blank"><img width=250 src="' + upgradeImage + '"/></a>';
                 }
-                if (upgrade.ytToken) {
-                    let ytSrc = 'https://www.youtube.com/embed/' + upgrade.ytToken + '?controls=0';
+                if (upgrade.ytVideo) {
+                    let ytSrc = 'https://www.youtube.com/embed/' + upgrade.ytVideo + '?controls=0';
                     if (upgrade.ytStart) ytSrc += '&start=' + upgrade.ytStart;
                     if (upgrade.ytEnd) ytSrc += '&end=' + upgrade.ytEnd;
                     popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
@@ -62,8 +62,8 @@ export class Markers {
                     let coinImage = 'img/gold/' + coin.image;
                     popup += '<br/><a href="' + coinImage + '" target="_blank"><img width=250 src="' + coinImage + '"/></a>';
                 }
-                if (coin.ytToken) {
-                    let ytSrc = 'https://www.youtube.com/embed/' + coin.ytToken + '?controls=0';
+                if (coin.ytVideo) {
+                    let ytSrc = 'https://www.youtube.com/embed/' + coin.ytVideo + '?controls=0';
                     if (coin.ytStart) ytSrc += '&start=' + coin.ytStart;
                     if (coin.ytEnd) ytSrc += '&end=' + coin.ytEnd;
                     popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
@@ -84,14 +84,14 @@ export class Markers {
                 let icon = Icons.get(collectable.icon);
                 let marker = L.marker([lat, lng], {icon: icon, title: collectable.comment})
                     .addTo(Layers.collectable);
-                if (collectable.comment || collectable.image || collectable.ytToken) {
+                if (collectable.comment || collectable.image || collectable.ytVideo) {
                     let popup = collectable.comment;
                     if (collectable.image) {
                         let collectableImage = 'img/collectables/' + collectable.image;
                         popup += '<br/><a href="' + collectableImage + '" target="_blank"><img width=250 src="' + collectableImage + '"/></a>';
                     }
-                    if (collectable.ytToken) {
-                        let ytSrc = 'https://www.youtube.com/embed/' + collectable.ytToken + '?controls=0';
+                    if (collectable.ytVideo) {
+                        let ytSrc = 'https://www.youtube.com/embed/' + collectable.ytVideo + '?controls=0';
                         if (collectable.ytStart) ytSrc += '&start=' + collectable.ytStart;
                         if (collectable.ytEnd) ytSrc += '&end=' + collectable.ytEnd;
                         popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';

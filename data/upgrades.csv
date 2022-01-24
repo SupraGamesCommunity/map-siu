@@ -1,4 +1,4 @@
-﻿type,icon,x,y,z,item,price,comment,image,ytToken,ytStart,ytEnd
+﻿type,icon,x,y,z,item,price,comment,image,ytVideo,ytStart,ytEnd
 chest,ammoCapacity,7016,1104,,Ammo Capacity+,,,,5KkEVBgFW3U,10446,
 chest,ammoCapacity,-47076,-4392,,Ammo Capacity+,,,,5KkEVBgFW3U,4670,
 chest,ammoCapacity,44400,-19720,,Ammo Capacity+,,,,5KkEVBgFW3U,6914,
