@@ -21,7 +21,13 @@ export class Markers {
                 if (upgrade.comment) popup += '<br/><i>' + upgrade.comment + '</i>';
                 if (upgrade.image) {
                     let upgradeImage = 'img/upgrades/' + upgrade.image;
-                    popup += '<br/><a href="' + upgradeImage + '" target="_blank"><img width=100 src="' + upgradeImage + '"/></a>';
+                    popup += '<br/><a href="' + upgradeImage + '" target="_blank"><img width=250 src="' + upgradeImage + '"/></a>';
+                }
+                if (upgrade.ytToken) {
+                    let ytSrc = 'https://www.youtube.com/embed/' + upgrade.ytToken + '?controls=0';
+                    if (upgrade.ytStart) ytSrc += '&start=' + upgrade.ytStart;
+                    if (upgrade.ytEnd) ytSrc += '&end=' + upgrade.ytEnd;
+                    popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                 }
                 L.marker([lat, lng], {icon: icon, title: upgrade.item})
                     .bindPopup(popup)
@@ -54,7 +60,13 @@ export class Markers {
                 if (coin.comment) popup += '<br/><i>' + coin.comment + '</i>';
                 if (coin.image) {
                     let coinImage = 'img/gold/' + coin.image;
-                    popup += '<br/><a href="' + coinImage + '" target="_blank"><img width=100 src="' + coinImage + '"/></a>';
+                    popup += '<br/><a href="' + coinImage + '" target="_blank"><img width=250 src="' + coinImage + '"/></a>';
+                }
+                if (coin.ytToken) {
+                    let ytSrc = 'https://www.youtube.com/embed/' + coin.ytToken + '?controls=0';
+                    if (coin.ytStart) ytSrc += '&start=' + coin.ytStart;
+                    if (coin.ytEnd) ytSrc += '&end=' + coin.ytEnd;
+                    popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                 }
                 popup += '&emsp;<small>#' + (index + 2) + '</small>'
                 L.marker([lat, lng], {icon: icon, title: title})
@@ -72,11 +84,17 @@ export class Markers {
                 let icon = Icons.get(collectable.icon);
                 let marker = L.marker([lat, lng], {icon: icon, title: collectable.comment})
                     .addTo(Layers.collectable);
-                if (collectable.comment || collectable.image) {
+                if (collectable.comment || collectable.image || collectable.ytToken) {
                     let popup = collectable.comment;
                     if (collectable.image) {
                         let collectableImage = 'img/collectables/' + collectable.image;
-                        popup += '<br/><a href="' + collectableImage + '" target="_blank"><img width=100 src="' + collectableImage + '"/></a>';
+                        popup += '<br/><a href="' + collectableImage + '" target="_blank"><img width=250 src="' + collectableImage + '"/></a>';
+                    }
+                    if (collectable.ytToken) {
+                        let ytSrc = 'https://www.youtube.com/embed/' + collectable.ytToken + '?controls=0';
+                        if (collectable.ytStart) ytSrc += '&start=' + collectable.ytStart;
+                        if (collectable.ytEnd) ytSrc += '&end=' + collectable.ytEnd;
+                        popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                     }
                     marker.bindPopup(popup);
                 }
