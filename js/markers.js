@@ -47,7 +47,7 @@ export class Markers {
                 let lat = -parseInt(coin.y, 10), lng = parseInt(coin.x, 10);
                 let icon = Icons.get('coin'), layer = Layers.coin;
                 if (coin.count > 1) icon = Icons.get('coinStash');
-                if (coin.type === 'chest') {icon = Icons.get('chest'); layer = Layers.coinChest;}
+                if (coin.type === 'chest') {icon = Icons.get('coinChest'); layer = Layers.coinChest;}
                 if (coin.type === 'brick') {icon = Icons.get('coinBrick'); layer = Layers.brick;}
                 let title = coin.count > 1 ? coin.count + ' Coins' : '1 Coin';
                 let popup = title;
