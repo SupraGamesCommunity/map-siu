@@ -2,6 +2,7 @@ export class Icons {
     static _icons = {};
 
     static get(id) {
+        if (Icons._icons[id] === undefined) alert('Unknown icon: ' + id);
         return Icons._icons[id];
     }
 
