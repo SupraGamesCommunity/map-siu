@@ -13,35 +13,14 @@ export class Markers {
         $.get('data/upgrades.csv', function(csv) {
             let upgrades = $.csv.toObjects(csv);
             upgrades.forEach(function(upgrade) {
-                let lat = -parseInt(upgrade.y, 10), lng = parseInt(upgrade.x);
-                let icon = Icons.get('chest'), layer = Layers.itemChest;
-                if (upgrade.type === 'chestGold') {icon = Icons.get('chestGold');}
-                if (upgrade.type === 'shop') {icon = Icons.get('shop'); layer = Layers.shop;}
+                let icon = 'chest', layer = Layers.itemChest;
+                if (upgrade.type === 'chestGold') {icon = 'chestGold';}
+                if (upgrade.type === 'shop') {icon = 'shop'; layer = Layers.shop;}
                 let popup = upgrade.item;
                 if (upgrade.comment) popup += '<br/><i>' + upgrade.comment + '</i>';
-                if (upgrade.image) {
-                    let upgradeImage = 'img/upgrades/' + upgrade.image;
-                    popup += '<br/><a href="' + upgradeImage + '" target="_blank"><img width=250 src="' + upgradeImage + '"/></a>';
-                }
-                if (upgrade.ytVideo) {
-                    let ytSrc = 'https://www.youtube.com/embed/' + upgrade.ytVideo + '?controls=0';
-                    if (upgrade.ytStart) ytSrc += '&start=' + upgrade.ytStart;
-                    if (upgrade.ytEnd) ytSrc += '&end=' + upgrade.ytEnd;
-                    popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-                }
-                L.marker([lat, lng], {icon: icon, title: upgrade.item})
-                    .bindPopup(popup)
-                    .addTo(layer);
 
-                // For now, if icon is set add it to additional layer
-                if (upgrade.icon) {
-                    icon = Icons.get(upgrade.icon);
-                    layer = Layers.upgrades;
-
-                    L.marker([lat, lng], {icon: icon, title: upgrade.item})
-                        .bindPopup(popup)
-                        .addTo(layer);
-                }
+                Markers._createMarker(upgrade, icon, layer, upgrade.item, popup, 'upgrades');
+                if (upgrade.icon) Markers._createMarker(upgrade, upgrade.icon, Layers.upgrades, upgrade.item, popup, 'upgrades');
             });
         });
     }
@@ -50,28 +29,15 @@ export class Markers {
         $.get('data/gold.csv', function(csv) {
             let coins = $.csv.toObjects(csv);
             coins.forEach(function(coin, index) {
-                let lat = -parseInt(coin.y, 10), lng = parseInt(coin.x, 10);
-                let icon = Icons.get('coin'), layer = Layers.coin;
-                if (coin.count > 1) icon = Icons.get('coinStash');
-                if (coin.type === 'chest') {icon = Icons.get('coinChest'); layer = Layers.coinChest;}
-                if (coin.type === 'brick') {icon = Icons.get('coinBrick'); layer = Layers.brick;}
+                let icon = 'coin', layer = Layers.coin;
+                if (coin.count > 1) icon = 'coinStash';
+                if (coin.type === 'chest') {icon = 'coinChest'; layer = Layers.coinChest;}
+                if (coin.type === 'brick') {icon = 'coinBrick'; layer = Layers.brick;}
                 let title = coin.count > 1 ? coin.count + ' Coins' : '1 Coin';
-                let popup = title;
+                let popup = title + '&emsp;<small>#' + (index + 2) + '</small>';
                 if (coin.comment) popup += '<br/><i>' + coin.comment + '</i>';
-                if (coin.image) {
-                    let coinImage = 'img/gold/' + coin.image;
-                    popup += '<br/><a href="' + coinImage + '" target="_blank"><img width=250 src="' + coinImage + '"/></a>';
-                }
-                if (coin.ytVideo) {
-                    let ytSrc = 'https://www.youtube.com/embed/' + coin.ytVideo + '?controls=0';
-                    if (coin.ytStart) ytSrc += '&start=' + coin.ytStart;
-                    if (coin.ytEnd) ytSrc += '&end=' + coin.ytEnd;
-                    popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-                }
-                popup += '&emsp;<small>#' + (index + 2) + '</small>'
-                L.marker([lat, lng], {icon: icon, title: title})
-                    .bindPopup(popup)
-                    .addTo(layer);
+
+                Markers._createMarker(coin, icon, layer, title, popup, 'gold');
             });
         });
     }
@@ -80,24 +46,7 @@ export class Markers {
         $.get('data/collectables.csv', function(csv) {
             let collectables = $.csv.toObjects(csv);
             collectables.forEach(function(collectable) {
-                let lat = -parseInt(collectable.y, 10), lng = parseInt(collectable.x, 10);
-                let icon = Icons.get(collectable.icon);
-                let marker = L.marker([lat, lng], {icon: icon, title: collectable.comment})
-                    .addTo(Layers.collectable);
-                if (collectable.comment || collectable.image || collectable.ytVideo) {
-                    let popup = collectable.comment;
-                    if (collectable.image) {
-                        let collectableImage = 'img/collectables/' + collectable.image;
-                        popup += '<br/><a href="' + collectableImage + '" target="_blank"><img width=250 src="' + collectableImage + '"/></a>';
-                    }
-                    if (collectable.ytVideo) {
-                        let ytSrc = 'https://www.youtube.com/embed/' + collectable.ytVideo + '?controls=0';
-                        if (collectable.ytStart) ytSrc += '&start=' + collectable.ytStart;
-                        if (collectable.ytEnd) ytSrc += '&end=' + collectable.ytEnd;
-                        popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-                    }
-                    marker.bindPopup(popup);
-                }
+                Markers._createMarker(collectable, collectable.icon, Layers.collectable, collectable.comment, collectable.comment, 'collectables');
             });
         });
     }
@@ -113,5 +62,30 @@ export class Markers {
                 marker.setPopupContent(x + ', ' + y);
                 marker.openPopup();
             });
+    }
+
+    static _createMarker(data, icon, layer, title, popup, imageFolder) {
+        let lat = -parseInt(data.y, 10), lng = parseInt(data.x, 10);
+        let marker = L.marker([lat, lng], {icon: Icons.get(icon), title: title})
+            .addTo(layer);
+        marker.updateFoundStatus = function() {
+            if (marker.found) marker.getElement().classList.add('found');
+            else marker.getElement().classList.remove('found');
+        };
+        marker.on('contextmenu', function(e) {
+            e.target.found = !e.target.found;
+            e.target.updateFoundStatus();
+        });
+        if (imageFolder && data.image) {
+            let image = 'img/' + imageFolder + '/' + data.image;
+            popup += '<br/><a href="' + image + '" target="_blank"><img width=250 src="' + image + '"/></a>';
+        }
+        if (data.ytVideo) {let ytSrc = 'https://www.youtube.com/embed/' + data.ytVideo + '?controls=0';
+            if (data.ytStart) ytSrc += '&start=' + data.ytStart;
+            if (data.ytEnd) ytSrc += '&end=' + data.ytEnd;
+            popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        }
+        if (popup) marker.bindPopup(popup);
+        return marker;
     }
 }

@@ -6,6 +6,10 @@ export class SiuMap {
             crs: L.CRS.Simple,
             minZoom: -8
         });
+        SiuMap.map.on('contextmenu', function() {});
+        SiuMap.map.on('overlayadd', function(e) {
+            e.layer.invoke('updateFoundStatus');
+        });
         let mapSize = {width: 8192, height: 5500}
         let pxTrans = {dx: -73730, dy: -29880, m: 18}
         let bounds = [
