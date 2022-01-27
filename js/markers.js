@@ -31,6 +31,8 @@ export class Markers {
             coins.forEach(function(coin, index) {
                 let icon = 'coin', layer = Layers.coin;
                 if (coin.count > 1) icon = 'coinStash';
+                if (coin.type === 'pots') icon = 'pots';
+                if (coin.type === 'meat') icon = 'meat';
                 if (coin.type === 'chest') {icon = 'coinChest'; layer = Layers.coinChest;}
                 if (coin.type === 'brick') {icon = 'coinBrick'; layer = Layers.brick;}
                 let title = coin.count > 1 ? coin.count + ' Coins' : '1 Coin';
