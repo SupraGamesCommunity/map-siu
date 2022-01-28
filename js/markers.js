@@ -1,5 +1,6 @@
 import { Layers } from "./layers.js";
 import { Icons } from "./icons.js";
+import { SiuMarker } from "./siu-marker.js";
 
 export class Markers {
     static async init() {
@@ -68,16 +69,8 @@ export class Markers {
 
     static _createMarker(data, icon, layer, title, popup, imageFolder) {
         let lat = -parseInt(data.y, 10), lng = parseInt(data.x, 10);
-        let marker = L.marker([lat, lng], {icon: Icons.get(icon), title: title})
+        let marker = new SiuMarker([lat, lng], {icon: Icons.get(icon), title: title})
             .addTo(layer);
-        marker.updateFoundStatus = function() {
-            if (marker.found) marker.getElement().classList.add('found');
-            else marker.getElement().classList.remove('found');
-        };
-        marker.on('contextmenu', function(e) {
-            e.target.found = !e.target.found;
-            e.target.updateFoundStatus();
-        });
         if (imageFolder && data.image) {
             let image = 'img/' + imageFolder + '/' + data.image;
             popup += '<br/><a href="' + image + '" target="_blank"><img width=250 src="' + image + '"/></a>';
