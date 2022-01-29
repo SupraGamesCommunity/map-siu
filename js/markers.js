@@ -69,18 +69,10 @@ export class Markers {
 
     static _createMarker(data, icon, layer, title, popup, imageFolder) {
         let lat = -parseInt(data.y, 10), lng = parseInt(data.x, 10);
-        let marker = new SiuMarker([lat, lng], {icon: Icons.get(icon), title: title})
-            .addTo(layer);
-        if (imageFolder && data.image) {
-            let image = 'img/' + imageFolder + '/' + data.image;
-            popup += '<br/><a href="' + image + '" target="_blank"><img width=250 src="' + image + '"/></a>';
-        }
-        if (data.ytVideo) {let ytSrc = 'https://www.youtube.com/embed/' + data.ytVideo + '?controls=0';
-            if (data.ytStart) ytSrc += '&start=' + data.ytStart;
-            if (data.ytEnd) ytSrc += '&end=' + data.ytEnd;
-            popup += '<br/><iframe width="250" height="140.625" src="' + ytSrc + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-        }
-        if (popup) marker.bindPopup(popup);
-        return marker;
+        return new SiuMarker([lat, lng], {icon: Icons.get(icon), title: title})
+            .addTo(layer)
+            .setPopupText(popup)
+            .setPopupImage(imageFolder, data.image)
+            .setPopupYouTube(data.ytVideo, data.ytStart, data.ytEnd);
     }
 }
