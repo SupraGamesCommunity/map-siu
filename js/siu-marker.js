@@ -1,10 +1,21 @@
-
 export var SiuMarker = L.Marker.extend({
     options: {
         found: false,
         popupText: null,
         popupImage: null,
         popupYouTube: null
+    },
+
+    initialize: function() {
+        L.Marker.prototype.initialize.apply(this, arguments);
+
+        this.on('contextmenu', this._toggleIcon);
+        this.bindPopup(() => this._generatePopup());
+    },
+
+    onAdd: function() {
+        L.Marker.prototype.onAdd.apply(this, arguments);
+        this.updateFoundStatus();
     },
 
     updateFoundStatus: function() {
@@ -56,9 +67,4 @@ export var SiuMarker = L.Marker.extend({
             this.options.popupYouTube
         ].filter(Boolean).join('<br/>');
     }
-});
-
-SiuMarker.addInitHook(function() {
-    this.on('contextmenu', this._toggleIcon);
-    this.bindPopup(() => this._generatePopup());
 });

@@ -1,5 +1,3 @@
-import { SiuMap } from "./siu-map.js";
-
 export class Layers {
     static upgrades;
     static shop;
@@ -10,14 +8,14 @@ export class Layers {
     static collectable;
     static coordinate;
 
-    static async init() {
-        Layers.upgrades = L.layerGroup().addTo(SiuMap.map);
+    static async init(map) {
+        Layers.upgrades = L.layerGroup().addTo(map);
         Layers.shop = L.layerGroup();
         Layers.itemChest = L.layerGroup();
         Layers.coinChest = L.layerGroup();
         Layers.coin = L.layerGroup();
         Layers.brick = L.layerGroup();
-        Layers.collectable = L.layerGroup().addTo(SiuMap.map);
+        Layers.collectable = L.layerGroup().addTo(map);
         Layers.coordinate = L.layerGroup();
 
         let layers = {
@@ -30,6 +28,6 @@ export class Layers {
             'Collectables' : Layers.collectable,
             'XY'           : Layers.coordinate
         }
-        L.control.layers({}, layers, {collapsed: false}).addTo(SiuMap.map);
+        L.control.layers({}, layers, {collapsed: false}).addTo(map);
     }
 }

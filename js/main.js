@@ -3,7 +3,8 @@ import { Layers } from "./layers.js";
 import { Markers } from "./markers.js";
 import { Icons } from "./icons.js";
 
-SiuMap.init()
+let map = new SiuMap();
+
+Layers.init(map)
     .then(Icons.init)
-    .then(Layers.init)
     .then(Markers.init);
