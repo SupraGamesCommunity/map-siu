@@ -14,14 +14,14 @@ export class Markers {
         $.get('data/upgrades.csv', function(csv) {
             let upgrades = $.csv.toObjects(csv);
             upgrades.forEach(function(upgrade) {
-                let icon = 'chest', layer = Layers.itemChest;
+                let icon = 'chest', layer = 'itemChest';
                 if (upgrade.type === 'chestGold') {icon = 'chestGold';}
-                if (upgrade.type === 'shop') {icon = 'shop'; layer = Layers.shop;}
+                if (upgrade.type === 'shop') {icon = 'shop'; layer = 'shop';}
                 let popup = upgrade.item;
                 if (upgrade.comment) popup += '<br/><i>' + upgrade.comment + '</i>';
 
                 Markers._createMarker(upgrade, icon, layer, upgrade.item, popup, 'upgrades');
-                if (upgrade.icon) Markers._createMarker(upgrade, upgrade.icon, Layers.upgrades, upgrade.item, popup, 'upgrades');
+                if (upgrade.icon) Markers._createMarker(upgrade, upgrade.icon, 'upgrades', upgrade.item, popup, 'upgrades');
             });
         });
     }
@@ -30,12 +30,12 @@ export class Markers {
         $.get('data/gold.csv', function(csv) {
             let coins = $.csv.toObjects(csv);
             coins.forEach(function(coin, index) {
-                let icon = 'coin', layer = Layers.coin;
+                let icon = 'coin', layer = 'coin';
                 if (coin.count > 1) icon = 'coinStash';
                 if (coin.type === 'pots') icon = 'pots';
                 if (coin.type === 'meat') icon = 'meat';
-                if (coin.type === 'chest') {icon = 'coinChest'; layer = Layers.coinChest;}
-                if (coin.type === 'brick') {icon = 'coinBrick'; layer = Layers.brick;}
+                if (coin.type === 'chest') {icon = 'coinChest'; layer = 'coinChest';}
+                if (coin.type === 'brick') {icon = 'coinBrick'; layer = 'brick';}
                 let title = coin.count > 1 ? coin.count + ' Coins' : '1 Coin';
                 let popup = title + '&emsp;<small>#' + (index + 2) + '</small>';
                 if (coin.comment) popup += '<br/><i>' + coin.comment + '</i>';
@@ -49,7 +49,7 @@ export class Markers {
         $.get('data/collectables.csv', function(csv) {
             let collectables = $.csv.toObjects(csv);
             collectables.forEach(function(collectable) {
-                Markers._createMarker(collectable, collectable.icon, Layers.collectable, collectable.comment, collectable.comment, 'collectables');
+                Markers._createMarker(collectable, collectable.icon, 'collectable', collectable.comment, collectable.comment, 'collectables');
             });
         });
     }
@@ -57,7 +57,7 @@ export class Markers {
     static async _addCoordinateExtractionTool() {
         L.marker([0, 0], {zIndexOffset: 10000, draggable: true})
             .bindPopup('0, 0')
-            .addTo(Layers.coordinate)
+            .addTo(Layers.get('coordinate'))
             .on('moveend', function(e) {
                 let marker = e.target;
                 let latlng = marker.getLatLng();
@@ -70,7 +70,7 @@ export class Markers {
     static _createMarker(data, icon, layer, title, popup, imageFolder) {
         let lat = -parseInt(data.y, 10), lng = parseInt(data.x, 10);
         return new SiuMarker([lat, lng], {icon: Icons.get(icon), title: title})
-            .addTo(layer)
+            .addTo(Layers.get(layer))
             .setPopupText(popup)
             .setPopupImage(imageFolder, data.image)
             .setPopupYouTube(data.ytVideo, data.ytStart, data.ytEnd);
