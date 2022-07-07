@@ -13,7 +13,7 @@ export var Map = L.Map.extend({
     initialize: function() {
         L.Map.prototype.initialize.call(this, 'map', {
             crs: L.CRS.Simple,
-            minZoom: -8,
+            minZoom: -7,
             maxZoom: -2,
         });
         this.on('contextmenu', function() {/* Do nothing */});
