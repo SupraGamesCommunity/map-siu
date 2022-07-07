@@ -12,6 +12,7 @@ export class Layers {
             let layers = $.csv.toObjects(csv);
             layers.forEach(function(layer) {
                 let layerObj = L.layerGroup();
+                if (layer.background) L.imageOverlay(layer.background, map.bounds).addTo(layerObj);
                 if (layer.defaultActive) layerObj.addTo(map);
                 layerMap[layer.name] = layerObj;
                 Layers._layers[layer.id] = layerObj;

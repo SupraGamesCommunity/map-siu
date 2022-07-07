@@ -1,9 +1,12 @@
-﻿id,name,defaultActive
-upgrades,Upgrades,x
-shop,Shop,
-itemChest,Item Chests,
-coinChest,Coin Chests,
-coin,Coins,
-brick,Gold Bricks,
-collectable,Collectables,x
-coordinate,XY,
+﻿id,name,background,defaultActive
+closedChest,Chests,,x
+shop,Shop,,x
+collectable,Collectables,,x
+upgrades,Upgrades,,
+misc,Miscellaneous,,
+coinChest,Coin Chests,,
+coin,Coins,,
+grave,Graves,,
+pad,Jump Pads,img/pad_map.png,
+pipe,Pipes,img/pipe_map.png,
+coordinate,XY,,
