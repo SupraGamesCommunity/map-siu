@@ -1,4 +1,4 @@
-# map-sl
-Map for Supraland
+# map-siu
+Map for Supraland Six Inches Under
 
-https://supragamescommunity.github.io/map-sl/
+https://supragamescommunity.github.io/map-siu/
